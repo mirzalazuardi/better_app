@@ -1,4 +1,9 @@
 class UserRepository
+  attr_reader :datasource
+  def initialize(datasource: User)
+    @datasource = datasource
+  end
+
   def all
     User.all
   end
