@@ -5,15 +5,15 @@ class UserRepository
   end
 
   def all
-    User.all
+    datasource.all
   end
 
   def find(args)
-    User.find(args)
+    datasource.find(args)
   end
 
   def new_entity(args = nil)
-    User.new(args)
+    datasource.new(args)
   end
 
   def save(user)
