@@ -1,5 +1,6 @@
 class UserController < ApplicationController
     before_action :find_user, :only => [:show, :edit, :update, :destroy]
+    respond_to :html, :json
 
     def index
       users  = ::UseCase::User::List.call()
