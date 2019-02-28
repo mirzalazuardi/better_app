@@ -5,7 +5,7 @@
   </tr>
   <% @users.each do |u| %>
   <tr>
-    <td><%=  link_to u.name, user_path(u)  %></td>
+    <td><%= u.user_link  %></td>
     <td> <%= u.edit_user_link %> </td>
     <td> <%= link_to "Delete", user_path(u), data: { confirm: 'Are you sure?', method: 'delete' } %> </td>
   </tr>
