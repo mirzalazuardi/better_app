@@ -34,7 +34,8 @@ class UserController < ApplicationController
 
     private
     def find_user
-      @user = ::UseCase::User::Find.call(params[:id])
+      user = ::UseCase::User::Find.call(params[:id])
+      @user = UserDecorator.new(user)
     end
 
     def user_params
