@@ -2,7 +2,8 @@ class UserController < ApplicationController
     before_action :find_user, :only => [:show, :edit, :update, :destroy]
 
     def index
-      @users = ::UseCase::User::List.call()
+      users  = ::UseCase::User::List.call()
+      @users = UserDecorator.wrap_collection(users)
     end
 
     def show; end
