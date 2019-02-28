@@ -4,10 +4,12 @@
     <th></th>
   </tr>
   <% @users.each do |u| %>
-  <tr>
-    <td><%= u.user_link  %></td>
-    <td> <%= u.edit_user_link %> </td>
-    <td> <%= u.delete_user_link %> </td>
-  </tr>
+    <tr>
+      <td><%= u.user_link  %></td>
+      <td>
+        <%= u.edit_user_link %>
+        <%= u.delete_user_link %>
+      </td>
+    </tr>
   <%end%>
 </table>
