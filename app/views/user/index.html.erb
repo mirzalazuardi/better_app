@@ -3,12 +3,12 @@
     <th>name</th>
     <th></th>
   </tr>
-  <% @users.each do |u| %>
+  <% @users.each do |user| %>
     <tr>
-      <td><%= u.user_link  %></td>
+      <td><%= user.link  %></td>
       <td>
-        <%= u.edit_user_link %>
-        <%= u.delete_user_link %>
+        <%= user.edit_link %>
+        <%= user.delete_link %>
       </td>
     </tr>
   <%end%>
