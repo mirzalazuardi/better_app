@@ -5,12 +5,16 @@ class UserController < ApplicationController
     def index
       users  = ::UseCase::User::List.call()
       @users = UserDecorator.wrap_collection(users)
+      respond_with @users
     end
 
-    def show; end
+    def show
+      respond_with @user
+    end
 
     def new
       @user = ::UseCase::User::New.call()
+      respond_with @user
     end
 
     def edit; end
