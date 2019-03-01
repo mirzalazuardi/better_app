@@ -1,3 +1,5 @@
-<%= flash[:notice] %>
+<% flash.each do |key, message| %>
+  <%= message %>
+<% end %>
 
 name = <%= @user[:name] %>
