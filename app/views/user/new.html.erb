@@ -1,5 +1,2 @@
 <%= flash_messages %>
-<%= form_for @user do |f| %>
-  <%= f.text_field 'name' %>
-  <%= f.submit 'Submit' %>
-<% end %>
+<%= render "shared/forms/user" %>

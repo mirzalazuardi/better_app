@@ -1,4 +1,2 @@
-<%= form_tag("/users/#{@user[:id]}", method: :put) do %>
-  <%= text_field_tag 'name' %>
-  <%= submit_tag 'Submit' %>
-<% end %>
+<%= flash_messages %>
+<%= render "shared/forms/user" %>
