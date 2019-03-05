@@ -7,7 +7,7 @@ module UseCase
 
       def call
         user = repository.new_entity(attrs)
-        repository.save(user) ? callbacks[:success].call(user) : callbacks[:fail].call()
+        repository.save(user) ? callbacks[:success].call(user) : callbacks[:fail].call(user)
       end
 
       private
