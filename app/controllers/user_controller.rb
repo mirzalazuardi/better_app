@@ -44,7 +44,7 @@ class UserController < ApplicationController
     end
 
     def user_params
-      params.permit(:name)
+      params.require(:user).permit(:name)
     end
 
     def overide_user(user)
