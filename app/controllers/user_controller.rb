@@ -20,14 +20,14 @@ class UserController < ApplicationController
     def edit; end
 
     def create
-      success = -> user { overide_user(user); respond_with(@user); }
+      success = -> user { overide_user(user); respond_with(@user) }
       failure = -> user { overide_user(user); respond_with(@user, alert: user.errors.full_messages.join(', '))}
       ::UseCase::User::Save.call(user_params, success: success, fail: failure)
     end
 
     def update
-      success = -> user {@user = user ; flash[:notice] = 'User was successfully updated.'; redirect_to(@user)}
-      failure = -> { render :action => "edit" }
+      success = -> user { overide_user(user); respond_with(@user) }
+      failure = -> user { overide_user(user); respond_with(@user, alert: user.errors.full_messages.join(', '))}
       ::UseCase::User::Update.call(@user, user_params, success: success, fail: failure)
     end
 
