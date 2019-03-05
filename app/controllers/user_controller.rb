@@ -20,8 +20,8 @@ class UserController < ApplicationController
     def edit; end
 
     def create
-      success = -> user { @user = user ; flash[:notice] = 'User was successfully created.';  redirect_to (@user) }
-      failure = -> { render :action => "new" }
+      success = -> user { overide_user(user); respond_with(@user); }
+      failure = -> user { overide_user(user); respond_with(@user, alert: user.errors.full_messages.join(', '))}
       ::UseCase::User::Save.call(user_params, success: success, fail: failure)
     end
 
@@ -45,5 +45,9 @@ class UserController < ApplicationController
 
     def user_params
       params.permit(:name)
+    end
+
+    def overide_user(user)
+      @user = user
     end
 end
