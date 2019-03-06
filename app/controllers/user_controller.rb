@@ -13,11 +13,13 @@ class UserController < ApplicationController
     end
 
     def new
-      @user = ::UseCase::User::New.call()
-      respond_with @user
+      @user_form = UserForm.new
+      respond_with @user_form.user
     end
 
-    def edit; end
+    def edit
+      @user_form = UserForm.new(@user)
+    end
 
     def create
       success = -> user { overide_user(user); respond_with(@user) }
