@@ -1,4 +1,4 @@
-<%= form_for @user do |f| %>
-  <%= f.text_field 'name' %>
+<%= form_with model: @user, local: true do |f| %>
+  <%= f.text_field 'name', id: 'custom_id_name' %>
   <%= f.submit 'Submit' %>
 <% end %>
