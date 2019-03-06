@@ -6,7 +6,7 @@ module UseCase
       end
 
       def call
-        repository.delete(user) ? callbacks[:success].call() : callbacks[:fail].call()
+        repository.delete(user) ? callbacks[:success].call(user) : callbacks[:fail].call(user)
       end
 
       private

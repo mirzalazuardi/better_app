@@ -34,8 +34,8 @@ class UserController < ApplicationController
     end
 
     def destroy
-      success = -> { redirect_to(users_path) }
-      failure = -> { redirect_to(users_path) }
+      success = -> user { overide_user(user); respond_with(@user, notice: 'User destroyed') }
+      failure = -> user { overide_user(user); respond_with(@user, alert: 'User cant destroyed') }
       ::UseCase::User::Delete.call(@user, success: success, fail: failure)
     end
 
