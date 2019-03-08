@@ -9,6 +9,10 @@ RSpec.describe UserController, type: :controller do
       get :index, format: :html
       expect(response.content_type).to eq 'text/html'
     end
+    it 'respond in js format' do
+      get :index, format: :js
+      expect(response.content_type).to eq 'text/javascript'
+    end
     it 'respond in json format' do
       get :index, format: :json
       expect(response.content_type).to eq 'application/json'
