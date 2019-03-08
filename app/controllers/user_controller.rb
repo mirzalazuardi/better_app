@@ -1,6 +1,7 @@
 class UserController < ApplicationController
     before_action :find_user, :only => [:show, :edit, :update, :destroy]
-    respond_to :html, :json
+    protect_from_forgery except: :index
+    respond_to :html, :json, :js
 
     def index
       users  = ::UseCase::User::List.call()
