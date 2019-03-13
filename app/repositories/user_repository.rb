@@ -16,6 +16,10 @@ class UserRepository
     datasource.new(args)
   end
 
+  def find_or_initialize_by(args = {id: nil})
+    datasource.find_or_initialize_by(**args)
+  end
+
   def save(user)
     user.save
   end
