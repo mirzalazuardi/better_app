@@ -1,5 +1,6 @@
 class UserController < ApplicationController
-    before_action :find_user, :only => [:show, :edit, :update, :destroy]
+    before_action :find_user, :only => [:show, :destroy]
+    before_action :init_user_form, :only => [:create, :edit, :update, :destroy]
     protect_from_forgery except: :index
     respond_to :html, :json, :js
 
@@ -18,26 +19,24 @@ class UserController < ApplicationController
       respond_with @user_form.user
     end
 
-    def edit
-      @user_form = UserForm.new(@user)
-    end
+    def edit; end
 
     def create
-      success = -> user { overide_user(user); respond_with(@user) }
-      failure = -> user { overide_user(user); respond_with(@user, alert: user.errors.full_messages.join(', '))}
-      ::UseCase::User::Save.call(user_params, success: success, fail: failure)
+      success = -> user { overide_user_form(user); respond_with(@user_form.user) }
+      fail = -> user { overide_user_form(user); respond_with(@user_form.user, alert: user.errors.full_messages.join(', '))}
+      @user_form.update(user_params, success: success, fail: fail)
     end
 
     def update
-      success = -> user { overide_user(user); respond_with(@user) }
-      failure = -> user { overide_user(user); respond_with(@user, alert: user.errors.full_messages.join(', '))}
-      ::UseCase::User::Update.call(@user, user_params, success: success, fail: failure)
+      success = -> user { overide_user_form(user); respond_with(@user_form.user) }
+      fail = -> user { overide_user_form(user); respond_with(@user_form.user, alert: user.errors.full_messages.join(', '))}
+      @user_form.update(user_params, success: success, fail: fail)
     end
 
     def destroy
-      success = -> user { overide_user(user); respond_with(@user, notice: 'User destroyed') }
-      failure = -> user { overide_user(user); respond_with(@user, alert: 'User cant destroyed') }
-      ::UseCase::User::Delete.call(@user, success: success, fail: failure)
+      success = -> user { overide_user_form(user); respond_with(@user, notice: 'User destroyed') }
+      fail = -> user { overide_user_form(user); respond_with(@user, alert: 'User cant destroyed') }
+      ::UseCase::User::Delete.call(@user, success: success, fail: fail)
     end
 
     private
@@ -46,11 +45,15 @@ class UserController < ApplicationController
       @user = UserDecorator.new(user)
     end
 
+    def init_user_form
+      @user_form = UserForm.new(id: params[:id])
+    end
+
     def user_params
       params.require(:user).permit(:name)
     end
 
-    def overide_user(user)
-      @user = user
+    def overide_user_form(user)
+      @user_form.user = user
     end
 end
