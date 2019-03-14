@@ -1,16 +1,20 @@
 <%= flash_messages %>
 <table>
-  <tr>
-    <th>name</th>
-    <th></th>
-  </tr>
-  <% @users.each do |user| %>
+  <thead>
     <tr>
-      <td><%= user.link  %></td>
-      <td>
-        <%= user.edit_link %>
-        <%= user.delete_link %>
-      </td>
+      <th>name</th>
+      <th></th>
     </tr>
-  <%end%>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.link  %></td>
+        <td>
+          <%= user.edit_link %>
+          <%= user.delete_link %>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
 </table>
