@@ -12,4 +12,21 @@ RSpec.feature 'UserPages', type: :feature do
     expect(tbody).to have_link 'Edit'
     expect(tbody).to have_link 'Delete'
   end
+  scenario 'show form in new user page' do
+    visit new_user_path
+
+    expect(page).to have_selector '#custom_id_name'
+    expect(page).to have_field 'custom_id_name'
+    expect(page).to have_button 'Submit'
+  end
+  scenario 'user creation' do
+    prev_user_count = User.count
+    name            = Faker::Name.name
+    visit new_user_path
+    fill_in 'custom_id_name', with: name
+    click_button 'Submit'
+
+    expect(User.count).to eq prev_user_count+1
+    expect(page).to have_content "User was successfully created. name = #{name}"
+  end
 end
