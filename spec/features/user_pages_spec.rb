@@ -9,5 +9,7 @@ RSpec.feature 'UserPages', type: :feature do
     tbody = page.find(:css, 'tbody')
 
     expect(tbody.all(:css, 'tr').size).to eq row_count
+    expect(tbody).to have_link 'Edit'
+    expect(tbody).to have_link 'Delete'
   end
 end
