@@ -6,7 +6,7 @@ FactoryBot.define do
       name { Faker::Name.unique.name }
     end
 
-    trait :with_tasks do
+    trait :with_3_tasks do
       transient do
         num 3
       end
