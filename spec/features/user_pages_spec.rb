@@ -29,4 +29,10 @@ RSpec.feature 'UserPages', type: :feature do
     expect(User.count).to eq prev_user_count+1
     expect(page).to have_content "User was successfully created. name = #{name}"
   end
+  scenario 'show user detail' do
+    user = create :user
+    visit user_path(user)
+
+    expect(page).to have_content "name = #{user.name}"
+  end
 end
