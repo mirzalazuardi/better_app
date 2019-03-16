@@ -19,7 +19,7 @@ RSpec.feature 'UserPages', type: :feature do
     expect(page).to have_field 'custom_id_name'
     expect(page).to have_button 'Submit'
   end
-  scenario 'user creation' do
+  scenario 'create user' do
     prev_user_count = User.count
     name            = Faker::Name.name
     visit new_user_path
