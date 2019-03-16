@@ -7,7 +7,7 @@ FactoryBot.define do
     end
 
     trait :with_tasks do
-      ignore do
+      transient do
         num 3
       end
 
