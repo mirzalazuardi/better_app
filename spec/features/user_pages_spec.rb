@@ -43,4 +43,15 @@ RSpec.feature 'UserPages', type: :feature do
 
     expect(User.count).to eq prev_user_count - 1
   end
+  scenario 'edit specific user' do
+    user          = create :user
+    new_user_name = Faker::Name.name
+    visit edit_user_path(user)
+    fill_in 'custom_id_name', with: new_user_name
+    click_on 'Submit'
+
+    expect(user.name).not_to eq new_user_name
+    expect(user.id).to eq User.last.id
+    expect(User.last.name).to eq new_user_name
+  end
 end
