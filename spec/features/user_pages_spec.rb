@@ -35,4 +35,12 @@ RSpec.feature 'UserPages', type: :feature do
 
     expect(page).to have_content "name = #{user.name}"
   end
+  scenario 'delete user' do
+    user            = create :user
+    prev_user_count = User.count
+    visit users_path
+    click_on 'Delete'
+
+    expect(User.count).to eq prev_user_count - 1
+  end
 end
